@@ -2,9 +2,6 @@
 
  ## Reimbursement application Source(ReibrsmntSvc)
  
- #### Git Repository
- 
- http://git@192.168.35.198/home/git/repo/RmbSvc
 
  #### Configurations
  
