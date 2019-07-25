@@ -1,0 +1,9 @@
+/target/
+.metadata
+.sonar
+*.log
+*.csv
+*.pdf
+.settings/
+erslogger.log
+.settings/org.eclipse.core.resources.prefs

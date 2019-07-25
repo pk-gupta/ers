@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-05-20T16:52:41 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="claim_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5b67fcee-4e09-4f68-950c-fc83a3ea1aa7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="claimId" class="java.lang.Integer"/>
+	<parameter name="realPath" class="java.lang.String"/>
+	<parameter name="pendingPath" class="java.lang.String"/>
+	<parameter name="approvedPath" class="java.lang.String"/>
+	<parameter name="QrImage" class="java.awt.Image"/>
+	<queryString>
+		<![CDATA[SELECT public.claimsubmit_header.claim_amount,
+	public.claimsubmit_header.claim_date,
+	public.claimsubmit_header.claim_no,
+	public.claimsubmit_header.period_from,
+	public.claimsubmit_header.period_to,
+	public.claimsubmit_header.project,
+	public.claimsubmit_header.remarks,
+	public.claimsubmit_header.final_status,
+	public.claimsubmit_header.currency_id,
+	public.claimsubmit_header.claim_type_id,
+	public.currency_master.currency_code,
+	public.claimsubmit_details.bill_date,
+	public.claimsubmit_details.bill_no,
+	public.claimsubmit_details.claim_amount as detail_amount,
+	public.claimsubmit_details.file as file,
+	public.claimsubmit_details.particulars,
+	public.claimsubmit_details.remarks as detail_remark,
+	employeeUser.cn as empName,
+	employeeUser.id as empId,
+	employeeUser.department,
+	approverUser.cn as approverUser,
+	public.claimtype_master.claim_code
+	
+FROM public.claimsubmit_details
+	 INNER JOIN public.claimsubmit_header ON 
+	 public.claimsubmit_details.claim_header_id = public.claimsubmit_header.id 
+	 INNER JOIN public.currency_master ON 
+	 public.claimsubmit_header.currency_id = public.currency_master.id 
+	 INNER JOIN public.user_master as employeeUser ON 
+	 public.claimsubmit_header.requesting_user_id = employeeUser.id
+	 INNER JOIN public.user_master as approverUser ON 
+	 public.claimsubmit_header.approved_person_id = approverUser.id
+	 INNER JOIN public.claimtype_master ON 
+	 public.claimsubmit_header.claim_type_id = public.claimtype_master.id 
+WHERE 
+	 public.claimsubmit_header.id= $P{claimId}]]>
+	</queryString>
+	<field name="claim_amount" class="java.lang.Double"/>
+	<field name="claim_date" class="java.sql.Timestamp"/>
+	<field name="claim_no" class="java.lang.String"/>
+	<field name="final_status" class="java.lang.Integer"/>
+	<field name="period_from" class="java.sql.Timestamp"/>
+	<field name="period_to" class="java.sql.Timestamp"/>
+	<field name="project" class="java.lang.String"/>
+	<field name="remarks" class="java.lang.String"/>
+	<field name="currency_id" class="java.lang.Integer"/>
+	<field name="claim_type_id" class="java.lang.Integer"/>
+	<field name="currency_code" class="java.lang.String"/>
+	<field name="bill_date" class="java.sql.Timestamp"/>
+	<field name="bill_no" class="java.lang.String"/>
+	<field name="detail_amount" class="java.lang.Double"/>
+	<field name="file" class="java.io.InputStream"/>
+	<field name="particulars" class="java.lang.String"/>
+	<field name="detail_remark" class="java.lang.String"/>
+	<field name="empName" class="java.lang.String"/>
+	<field name="empId" class="java.lang.String"/>
+	<field name="approverUser" class="java.lang.String"/>
+	<field name="department" class="java.lang.String"/>
+	<field name="claim_code" class="java.lang.String"/>
+	<group name="claim_amount">
+		<groupExpression><![CDATA[$F{claim_amount}]]></groupExpression>
+	</group>
+	<group name="claim_date">
+		<groupExpression><![CDATA[$F{claim_date}]]></groupExpression>
+	</group>
+	<group name="claim_no">
+		<groupExpression><![CDATA[$F{claim_no}]]></groupExpression>
+	</group>
+	<group name="period_from">
+		<groupExpression><![CDATA[$F{period_from}]]></groupExpression>
+	</group>
+	<group name="period_to">
+		<groupExpression><![CDATA[$F{period_to}]]></groupExpression>
+	</group>
+	<group name="project">
+		<groupExpression><![CDATA[$F{project}]]></groupExpression>
+	</group>
+	<group name="remarks">
+		<groupExpression><![CDATA[$F{remarks}]]></groupExpression>
+	</group>
+	<group name="currency_id">
+		<groupExpression><![CDATA[$F{currency_id}]]></groupExpression>
+	</group>
+	<group name="claim_type_id">
+		<groupExpression><![CDATA[$F{claim_type_id}]]></groupExpression>
+	</group>
+	<group name="currency_code">
+		<groupExpression><![CDATA[$F{currency_code}]]></groupExpression>
+	</group>
+	<group name="bill_date">
+		<groupExpression><![CDATA[$F{bill_date}]]></groupExpression>
+	</group>
+	<group name="bill_no">
+		<groupExpression><![CDATA[$F{bill_no}]]></groupExpression>
+	</group>
+	<group name="COLUMN_13">
+		<groupExpression><![CDATA[$F{detail_amount}]]></groupExpression>
+	</group>
+	<group name="particulars">
+		<groupExpression><![CDATA[$F{particulars}]]></groupExpression>
+	</group>
+	<group name="COLUMN_15">
+		<groupExpression><![CDATA[$F{detail_remark}]]></groupExpression>
+	</group>
+	<group name="empName">
+		<groupExpression><![CDATA[$F{empName}]]></groupExpression>
+	</group>
+	<group name="empId">
+		<groupExpression><![CDATA[$F{empId}]]></groupExpression>
+	</group>
+	<group name="department">
+		<groupExpression><![CDATA[$F{department}]]></groupExpression>
+	</group>
+	<group name="claim_code">
+		<groupExpression><![CDATA[$F{claim_code}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image hAlign="Left">
+				<reportElement x="280" y="10" width="270" height="69" uuid="cc1f89e7-ec9c-421c-97d6-c5b46c2f3d69"/>
+				<imageExpression><![CDATA[$P{realPath}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="176" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="70" height="20" uuid="a9a7ec24-8abd-4d54-980f-5382591a186b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Claimed by]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="10" width="100" height="20" forecolor="#FA0025" uuid="cfc61df2-8edd-4f53-92d9-1deacbd5ccb2">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="10" width="70" height="20" uuid="4b78afe9-4123-495f-8e5a-d6e84ac47193">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Id]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="290" y="10" width="75" height="20" uuid="545a1736-0b3b-489b-b14a-eee610e39d77">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{empId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="40" width="70" height="20" uuid="c20962ba-eac9-4380-81d2-eaad80873607">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emp Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="40" width="175" height="20" uuid="cb3acab4-261c-46ac-930f-51c3ff0a3205">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{empName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="10" width="60" height="20" uuid="4010c7ee-5f20-4be6-8ef5-23eb796d5a7d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="10" width="80" height="20" uuid="f2fe4693-8cd1-473b-9e7b-ccf202366621">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{currency_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="40" width="70" height="20" uuid="5b46542f-4263-46ad-8385-42a65cf098ad">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Claim Type]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="290" y="40" width="175" height="20" uuid="107caf41-0e06-43c9-9ddc-844d2b1aa0fb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{claim_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="40" width="100" height="20" uuid="a3eb4e57-b0b7-4acf-b788-ef6814a1c788">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Claim Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="40" width="80" height="20" uuid="d22f6bc7-f148-4c2f-90dd-b4ed6e0322ae">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{claim_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="100" width="70" height="20" uuid="b4f2f500-e74e-46bd-83c9-e30ceb394a88">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="100" width="400" height="20" uuid="030b8f3c-d553-404c-8102-f151c541ad38">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="70" width="70" height="20" uuid="f2755aa7-ad2e-4486-8174-cb985a201e01">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Period From]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="90" y="70" width="75" height="20" uuid="b07f5236-3e0c-45c6-b411-330c924a4d27">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{period_from}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="70" width="70" height="20" uuid="bc4596ab-385a-4f1d-8b9b-27ee96e91f11">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Period To]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="290" y="70" width="75" height="20" uuid="8bfd5a5b-1d60-4f67-815c-473f60be459f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{period_to}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="90" y="140" width="170" height="20" uuid="c48692a0-0dec-4cd5-bc99-5658a757c437"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Particulars]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="140" width="100" height="20" uuid="12c59151-a797-4136-8291-0870a5fd49e4"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="140" width="70" height="20" uuid="9ee67473-c885-4817-b764-047561a0a199"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="140" width="154" height="20" uuid="3336146f-efa5-437d-b8d4-c82e2b99edff"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="63" y="112" width="428" height="56" forecolor="#808080" uuid="3bdd5d67-94f0-457f-8477-b1d0438d7bc9">
+					<printWhenExpression><![CDATA[$F{final_status}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Serif" size="30" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[This is a draft status report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="63" y="112" width="428" height="56" forecolor="#808080" uuid="3bdd5d67-94f0-457f-8477-b1d0438d7bc9">
+					<printWhenExpression><![CDATA[$F{final_status}==5]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Serif" size="30" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[This is a forwarded report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="63" y="112" width="428" height="56" forecolor="#808080" uuid="3bdd5d67-94f0-457f-8477-b1d0438d7bc9">
+					<printWhenExpression><![CDATA[$F{final_status}==4]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Serif" size="30" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[This is a rejected report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="70" width="60" height="20" uuid="d8f47f25-3a57-453f-877e-e9afad38fc9e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approver]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="450" y="70" width="180" height="20" uuid="3580e2b6-f42e-4827-ae93-6bb4a4de31ce">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{approverUser}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="10" width="170" height="20" uuid="3b28eb8f-8606-4600-a80c-4a41529d6bee">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{particulars}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="10" width="100" height="20" uuid="6f8b6172-a9a8-4b93-93c8-9af61e0e73e3">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{detail_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="10" y="10" width="70" height="20" uuid="fa3feb66-e656-4d08-84f1-f5bdd89e938f"/>
+				<textFieldExpression><![CDATA[$F{bill_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="10" width="154" height="20" uuid="f577d2ea-4a1b-41ac-96a0-f724fb1e9e33">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{detail_remark}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="35" width="535" height="1" uuid="b3d515dc-5163-492d-b9d2-a80edd549218">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="87" splitType="Stretch">
+			<image hAlign="Left">
+				<reportElement x="145" y="-9" width="155" height="96" uuid="a4b72577-90a4-47b9-97e9-35a427e4bef1">
+					<printWhenExpression><![CDATA[$F{final_status}==2]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{pendingPath}]]></imageExpression>
+			</image>
+			<image hAlign="Left">
+				<reportElement x="200" y="14" width="105" height="69" uuid="a4b72577-90a4-47b9-97e9-35a427e4bef1">
+					<printWhenExpression><![CDATA[$F{final_status}==3]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{approvedPath}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape" hAlign="Left" isUsingCache="false">
+				<reportElement x="340" y="-10" width="180" height="80" uuid="5ae177aa-8af6-4fe2-a6f2-37bd2e9c4340"/>
+				<imageExpression><![CDATA[$P{QrImage}]]></imageExpression>
+			</image>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
